@@ -1,0 +1,12 @@
+{
+  "name": "matthiasnoback/behat-expect-exception",
+  "require-dev": {
+    "php": "^7.2",
+    "behat/behat": "^3.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "": "src/"
+    }
+  }
+}
