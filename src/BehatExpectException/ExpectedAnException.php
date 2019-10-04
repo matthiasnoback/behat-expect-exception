@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Test\Acceptance;
+namespace BehatExpectException;
 
 use RuntimeException;
 

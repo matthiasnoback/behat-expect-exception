@@ -1,8 +1,10 @@
 <?php
 
 use Behat\Behat\Context\Context;
+use Behat\Behat\Tester\Exception\PendingException;
 use BehatExpectException\ExceptionExpectationFailed;
 use BehatExpectException\ExpectException;
+use BehatExpectException\ExpectedAnException;
 
 final class FeatureContext implements Context
 {
@@ -58,5 +60,29 @@ final class FeatureContext implements Context
         } catch (ExceptionExpectationFailed $exception) {
             // this was supposed to happen
         }
+    }
+
+    /**
+     * @When a step runs some code that is expected to fail but does not throw an exception
+     */
+    public function failToEvenFail(): void
+    {
+        try {
+            $this->shouldFail(
+                function () {
+                    // does not fail, contrary to expectations
+                });
+        } catch (ExpectedAnException $exception) {
+            // we catch this one now so we can verify that it has been thrown
+            $this->caughtException = $exception;
+        }
+    }
+
+    /**
+     * @Then that step will have thrown an ExpectedAnException
+     */
+    public function confirmExceptionIsExpectedAnException(): void
+    {
+        $this->assertCaughtExceptionMatches(ExpectedAnException::class);
     }
 }

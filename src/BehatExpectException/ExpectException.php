@@ -5,7 +5,6 @@ namespace BehatExpectException;
 
 use Exception;
 use LogicException;
-use Test\Acceptance\ExpectedAnException;
 
 trait ExpectException
 {

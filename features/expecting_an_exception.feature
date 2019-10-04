@@ -23,3 +23,7 @@ Feature:
   Scenario: A different exception with different message was thrown
     When a step runs some code that throws a RuntimeException with a message "The same message"
     Then another step will fail to confirm that the expected LogicException with a message containing "A different message" was thrown
+
+  Scenario: The code does not even throw an exception
+    When a step runs some code that is expected to fail but does not throw an exception
+    Then that step will have thrown an ExpectedAnException
