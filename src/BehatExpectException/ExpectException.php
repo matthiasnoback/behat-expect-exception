@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace BehatExpectException;
 
 use Exception;
-use LogicException;
 
 trait ExpectException
 {
@@ -28,12 +27,21 @@ trait ExpectException
         }
     }
 
+    private function mayFail(callable $function): void
+    {
+        try {
+            $function();
+        } catch (Exception $exception) {
+            $this->caughtException = $exception;
+        }
+    }
+
     private function assertCaughtExceptionMatches(
         string $expectedExceptionClass,
         ?string $messageShouldContain = null
     ) {
         if (!$this->caughtException instanceof Exception) {
-            throw new LogicException('To catch an exception, call $this->shouldFail() first');
+            throw new ExceptionExpectationFailed('No exception was caught. Call $this->shouldFail() or $this->mayFail() first');
         }
 
         if (!$this->caughtException instanceof $expectedExceptionClass) {

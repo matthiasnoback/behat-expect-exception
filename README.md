@@ -26,7 +26,12 @@ final class FeatureContext implements Context
      */
     public function iTryToMakeAReservation(int $numberOfSeats): void
     {
-        // Catch the exception using $this->shouldFail():
+        /* 
+         * Catch an exception using $this->shouldFail().
+         * If the code in the callable doesn't throw an exception, shouldFail()
+         * itself will throw an ExpectedAnException exception.
+         */
+        
         $this->shouldFail(
             function () use ($numberOfSeats) {
                 // This will throw a CouldNotMakeReservation exception:
@@ -43,6 +48,29 @@ final class FeatureContext implements Context
         $this->assertCaughtExceptionMatches(
             CouldNotMakeReservation::class,
             $message
+        );
+    }
+    
+    /**
+     * @When I make a reservation for :numberOfSeats seats
+     */
+    public function iMakeAReservation(int $numberOfSeats): void
+    {
+        /*
+         * Catch a possible exception using $this->mayFail().
+         * If the code in the callable doesn't throw an exception,
+         * then it's not a problem. mayFail() doesn't throw an
+         * ExpectedAnException exception itself in that case.
+         * You can still use assertCaughtExceptionMatches(), but
+         * it will throw an ExpectedAnException if no exception was
+         * caught. 
+         */
+        
+        $this->mayFail(
+            function () use ($numberOfSeats) {
+                // This might throw a CouldNotMakeReservation exception:
+                $this->reservationService()->makeReservation($numberOfSeats);
+            }
         );
     }
 }
