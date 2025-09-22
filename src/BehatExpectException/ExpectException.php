@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace BehatExpectException;
@@ -40,16 +41,16 @@ trait ExpectException
         string $expectedExceptionClass,
         ?string $messageShouldContain = null
     ) {
-        if (!$this->caughtException instanceof Exception) {
+        if (! $this->caughtException instanceof Exception) {
             throw new ExceptionExpectationFailed('No exception was caught. Call $this->shouldFail() or $this->mayFail() first');
         }
 
-        if (!$this->caughtException instanceof $expectedExceptionClass) {
+        if (! $this->caughtException instanceof $expectedExceptionClass) {
             throw new ExceptionExpectationFailed(
                 sprintf(
                     'Expected the caught exception to be of type %s, caught an exception of type %s instead',
                     $expectedExceptionClass,
-                    get_class($this->caughtException)
+                    $this->caughtException::class
                 )
             );
         }

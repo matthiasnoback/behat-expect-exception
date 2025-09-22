@@ -17,7 +17,8 @@ final class FeatureContext implements Context
         $this->shouldFail(
             function () use ($exceptionClass, $exceptionMessage) {
                 throw new $exceptionClass($exceptionMessage);
-            });
+            }
+        );
     }
 
     /**
@@ -56,7 +57,7 @@ final class FeatureContext implements Context
             );
 
             throw new RuntimeException('The code above should have thrown an ExceptionExpectationFailed exception');
-        } catch (ExceptionExpectationFailed $exception) {
+        } catch (ExceptionExpectationFailed) {
             // this was supposed to happen
         }
     }
@@ -70,7 +71,8 @@ final class FeatureContext implements Context
             $this->shouldFail(
                 function () {
                     // does not fail, contrary to expectations
-                });
+                }
+            );
         } catch (ExpectedAnException $exception) {
             // we catch this one now so we can verify that it has been thrown
             $this->caughtException = $exception;
@@ -96,7 +98,7 @@ final class FeatureContext implements Context
                     // may fail, but does not fail
                 }
             );
-        } catch (Exception $exception) {
+        } catch (Exception) {
             throw new RuntimeException('The step was not supposed to fail');
         }
     }
