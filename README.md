@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/matthiasnoback/behat-expect-exception.svg?branch=master)](https://travis-ci.org/matthiasnoback/behat-expect-exception)
-
 ## Installation
 
 ```bash
@@ -75,3 +73,9 @@ final class FeatureContext implements Context
     }
 }
 ```
+
+## Maintenance
+
+- Run `composer install` to install project dependencies (requires PHP 8.4 and Composer globally installed)
+- Run `composer fix` to fix coding style
+- Run `composer test` to run the tests

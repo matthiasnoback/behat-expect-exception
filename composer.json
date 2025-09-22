@@ -1,15 +1,27 @@
 {
   "name": "matthiasnoback/behat-expect-exception",
   "require": {
-    "php": "^8.3"
+    "php": "^8.4"
   },
   "require-dev": {
-    "behat/behat": "^3.24"
+    "behat/behat": "^3.24",
+    "symplify/easy-coding-standard": "^12.4",
+    "symplify/coding-standard": "^12.4",
+    "rector/rector": "^2.1"
   },
   "autoload": {
     "psr-4": {
       "": "src/"
     }
   },
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "fix": [
+      "vendor/bin/rector",
+      "vendor/bin/ecs --fix"
+    ],
+    "test": [
+      "vendor/bin/behat"
+    ]
+  }
 }
