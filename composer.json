@@ -1,8 +1,10 @@
 {
   "name": "matthiasnoback/behat-expect-exception",
+  "require": {
+    "php": "^8.3"
+  },
   "require-dev": {
-    "php": "^7.2",
-    "behat/behat": "^3.5"
+    "behat/behat": "^3.24"
   },
   "autoload": {
     "psr-4": {
